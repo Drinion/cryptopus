@@ -13,8 +13,12 @@ export default class TeamsFoldersIndexRoute extends BaseRoute {
     this.navService.searchQuery = null;
   }
 
-  model(params) {
-    return this.store.query("team", params);
+  async model(teamParams, folderParams) {
+    let [team, folder] = await Promise.all([
+      this.store.query("team", teamParams),
+      this.store.query("folder", folderParams)
+    ])
+    return {team, folder}
   }
 
   @action

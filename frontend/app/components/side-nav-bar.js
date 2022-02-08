@@ -42,6 +42,13 @@ export default class SideNavBar extends Component {
     }
   }
 
+  modelHash(team, folder) {
+    console.log("modelhash");
+    return Ember.RSVP.hash({
+      team: team
+    })
+  }
+
   @action
   setSelectedFolder(folder) {
     if (isPresent(this.args.navbar)) {
