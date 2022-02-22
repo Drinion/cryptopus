@@ -12,16 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2022_02_14_135340) do
 
-  create_table "accounts", force: :cascade do |t|
-    t.string "accountname", limit: 40, default: "", null: false
-    t.integer "group_id", default: 0, null: false
-    t.text "description"
-    t.binary "username"
-    t.binary "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "encryptables", force: :cascade do |t|
     t.string "name", limit: 70, default: "", null: false
     t.integer "folder_id", default: 0, null: false
@@ -32,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_135340) do
     t.string "type", default: "Account::Credentials", null: false
     t.text "encrypted_data", limit: 16777215
     t.integer "credential_id"
+    t.text "content_type"
     t.index ["description"], name: "index_encryptables_on_description"
     t.index ["name"], name: "index_encryptables_on_name"
     t.index ["tag"], name: "index_encryptables_on_tag"
@@ -44,43 +35,6 @@ ActiveRecord::Schema.define(version: 2022_02_14_135340) do
     t.datetime "updated_at", null: false
     t.integer "team_id", default: 0, null: false
     t.index ["name"], name: "index_folders_on_name"
-  end
-
-  create_table "grouppasswords", force: :cascade do |t|
-    t.integer "group_id", default: 0, null: false
-    t.binary "password", null: false
-    t.integer "user_id", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "groups", force: :cascade do |t|
-    t.string "groupname", limit: 40, default: "", null: false
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", default: 0, null: false
-  end
-
-  create_table "items", force: :cascade do |t|
-    t.integer "account_id", default: 0, null: false
-    t.text "description"
-    t.binary "file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "filename", null: false
-    t.text "content_type", null: false
-  end
-
-  create_table "ldapsettings", force: :cascade do |t|
-    t.string "basename", limit: 200, default: "ou=users,dc=yourdomain,dc=com", null: false
-    t.string "hostname", limit: 50, default: "yourdomain.com", null: false
-    t.string "portnumber", limit: 10, default: "636", null: false
-    t.string "encryption", limit: 30, default: "simple_tls", null: false
-  end
-
-  create_table "recryptrequests", force: :cascade do |t|
-    t.integer "user_id", default: 0, null: false
   end
 
   create_table "settings", force: :cascade do |t|
