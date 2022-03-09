@@ -13,7 +13,7 @@ class Account::EncryptedData
   end
 
   def encrypt(encryption_key)
-    value, iv = Crypto::Symmetric::AES256IV.encrypt(cleartext_value.to_json, encryption_key)
+    value, iv = Crypto::Symmetric::Aes256IV.encrypt(cleartext_value.to_json, encryption_key)
     self.value = Base64.strict_encode64(value)
     self.iv = Base64.strict_encode64(iv)
   end
@@ -22,7 +22,7 @@ class Account::EncryptedData
     b64_value = Base64.strict_decode64(value)
     b64_iv = Base64.strict_decode64(iv)
 
-    Crypto::Symmetric::AES256IV.decrypt(b64_value, encryption_key, b64_iv)
+    Crypto::Symmetric::Aes256IV.decrypt(b64_value, encryption_key, b64_iv)
   end
 
   def to_json(*_args)

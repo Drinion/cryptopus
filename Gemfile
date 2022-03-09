@@ -2,10 +2,10 @@
 
 source 'http://rubygems.org'
 
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0.0'
 
 gem 'figaro'
-gem 'mysql2'
+gem 'mysql2', '~> 0.5.3'
 gem 'net-ldap'
 gem 'puma'
 gem 'sqlite3'

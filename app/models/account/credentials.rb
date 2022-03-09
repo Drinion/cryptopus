@@ -21,18 +21,18 @@ class Account::Credentials < Account
     encrypted_value = send(attr)
     return if encrypted_value.blank?
 
-    Crypto::Symmetric::AES256.decrypt(encrypted_value, team_password)
+    Crypto::Symmetric::Aes256.decrypt(encrypted_value, team_password)
   end
 
   def encrypt_username(team_password)
     return self.username = '' if cleartext_username.blank?
 
-    self.username = Crypto::Symmetric::AES256.encrypt(cleartext_username, team_password)
+    self.username = Crypto::Symmetric::Aes256.encrypt(cleartext_username, team_password)
   end
 
   def encrypt_password(team_password)
     return if cleartext_password.blank?
 
-    self.password = Crypto::Symmetric::AES256.encrypt(cleartext_password, team_password)
+    self.password = Crypto::Symmetric::Aes256.encrypt(cleartext_password, team_password)
   end
 end
